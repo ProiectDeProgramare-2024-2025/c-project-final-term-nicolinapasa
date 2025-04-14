@@ -6,15 +6,18 @@
 void adauga_angajat() {
     FILE *f = fopen("angajati.txt", "a");
     if (!f) {
-        printf(" | Eroare la deschiderea fisierului.\n");
+        printf("\033[0;31m");
+        printf(" | Eroare la deschiderea fisierului.\n"); 
+        printf("\033[0m");
+        
         return;
     }
 
     Employee emp;
     printf("===== ADAUGARE ANGAJATI =====\n\n");
     printf(" | ID: "); scanf("%d", &emp.id); getchar();
-    printf(" | Nume: "); fgets(emp.name, MAX_NAME, stdin); strtok(emp.name, "\n");
-    printf(" | Adresa: "); fgets(emp.address, MAX_ADDRESS, stdin); strtok(emp.address, "\n");
+    printf(" | Nume (complet): "); fgets(emp.name, MAX_NAME, stdin); strtok(emp.name, "\n");
+    printf(" | Adresa (completa): "); fgets(emp.address, MAX_ADDRESS, stdin); strtok(emp.address, "\n");
     printf(" | Post: "); fgets(emp.position, MAX_POSITION, stdin); strtok(emp.position, "\n");
     printf(" | Data angajarii (dd/mm/yyyy): "); fgets(emp.hire_date, 11, stdin); strtok(emp.hire_date, "\n");
     printf(" | Salariu: "); scanf("%f", &emp.salary); getchar();
@@ -23,13 +26,18 @@ void adauga_angajat() {
             emp.id, emp.name, emp.address, emp.position, emp.hire_date, emp.salary);
 
     fclose(f);
+    printf("\033[0;32m");
     printf(" | Angajat adaugat cu succes!\n");
+    printf("\033[0m");
 }
 
 void afiseaza_angajati() {
     FILE *f = fopen("angajati.txt", "r");
     if (!f) {
+        printf("\033[0;31m");
         printf("| Nu exista angajati sau nu s-a putut deschide fisierul.\n");
+        printf("\033[0m");
+        
         return;
     }
 
@@ -54,7 +62,9 @@ void actualizeaza_angajat() {
     FILE *f = fopen("angajati.txt", "r");
     FILE *temp = fopen("temp.txt", "w");
     if (!f || !temp) {
+        printf("\033[0;31m"); 
         printf(" | Eroare la deschiderea fisierului.\n");
+        printf("\033[0m");
         return;
     }
 
@@ -63,10 +73,10 @@ void actualizeaza_angajat() {
             &emp.id, emp.name, emp.address, emp.position, emp.hire_date, &emp.salary) == 6) {
         if (emp.id == id) {
             printf(" | Introduceti noile date:\n");
-            printf(" | Nume: "); fgets(emp.name, MAX_NAME, stdin); strtok(emp.name, "\n");
-            printf(" | Adresa: "); fgets(emp.address, MAX_ADDRESS, stdin); strtok(emp.address, "\n");
+            printf(" | Nume (complet): "); fgets(emp.name, MAX_NAME, stdin); strtok(emp.name, "\n");
+            printf(" | Adresa (completa): "); fgets(emp.address, MAX_ADDRESS, stdin); strtok(emp.address, "\n");
             printf(" | Post: "); fgets(emp.position, MAX_POSITION, stdin); strtok(emp.position, "\n");
-            printf(" | Data angajarii: "); fgets(emp.hire_date, 11, stdin); strtok(emp.hire_date, "\n");
+            printf(" | Data angajarii (dd/mm/yyyy): "); fgets(emp.hire_date, 11, stdin); strtok(emp.hire_date, "\n");
             printf(" | Salariu: "); scanf("%f", &emp.salary); getchar();
             found = 1;
         }
@@ -81,9 +91,13 @@ void actualizeaza_angajat() {
     rename("temp.txt", "angajati.txt");
 
     if (found) {
+        printf("\033[0;32m");
         printf("\n | Angajat actualizat cu succes.\n");
+        printf("\033[0m");
     } else {
+        printf("\033[0;31m"); 
         printf("\n | Angajatul nu a fost gasit.\n");
+        printf("\033[0m");
     }
 }
 
@@ -96,7 +110,9 @@ void sterge_angajat() {
     FILE *temp = fopen("temp.txt", "w");
 
     if (!f || !temp) {
+        printf("\033[0;31m"); 
         printf("\n | Eroare la deschiderea fisierului.\n");
+        printf("\033[0m");
         return;
     }
 
@@ -119,9 +135,13 @@ void sterge_angajat() {
     rename("temp.txt", "angajati.txt");
 
     if (found) {
+        printf("\033[0;32m");
         printf("\n | Angajat sters cu succes.\n");
+        printf("\033[0m");
     } else {
+        printf("\033[0;31m");
         printf("\n | Angajatul nu a fost gasit.\n");
+        printf("\033[0m");
     }
 }
 
@@ -133,7 +153,9 @@ void cauta_angajat() {
 
     FILE *f = fopen("angajati.txt", "r");
     if (!f) {
+        printf("\033[0;31m"); 
         printf(" | Eroare la deschiderea fisierului.\n");
+        printf("\033[0m");
         return;
     }
 
@@ -148,7 +170,11 @@ void cauta_angajat() {
         }
     }
 
-    if (!gasit) printf(" | Niciun angajat gasit.\n");
+    if (!gasit) {
+        printf("\033[0;31m");
+        printf("\n | Nici un angajat gasit.\n");
+        printf("\033[0m");
+    }
     fclose(f);
 }
 
@@ -162,7 +188,9 @@ int compara(const void *a, const void *b) {
 void sorteaza_angajati() {
     FILE *f = fopen("angajati.txt", "r");
     if (!f) {
+        printf("\033[0;31m"); 
         printf(" | Eroare la deschiderea fisierului.\n");
+        printf("\033[0m");
         return;
     }
 

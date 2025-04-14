@@ -16,6 +16,7 @@ int main()
     do
     {
         clear_screen();
+        printf("\n");
         printf("===== MENIU PRINCIPAL =====\n");
         printf(" | 0 - Exit\n");
         printf(" | 1 - Afisarea angajatilor.\n");
@@ -37,11 +38,21 @@ int main()
             case 4: sterge_angajat(); break;
             case 5: cauta_angajat(); break;
             case 6: sorteaza_angajati(); break;
-            case 0: printf("Exit"); break;
-            default: printf("Optiune invalida.\n");
+            case 0: {
+                printf("\033[0;36m");
+                printf("Exit"); break;
+                printf("\033[0m");
+            }
+            default: {
+                printf("\033[0;31m");
+                printf("\n | Optiune invalida.\n");
+                printf("\033[0m");
+            }
         }
         if (option != 0) {
+            printf("\033[0;36m");
             printf("\nApasa Enter pentru a reveni la meniul principal ↑");
+            printf("\033[0m");
             getchar();
         }
     } while (option != 0);
