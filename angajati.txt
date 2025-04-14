@@ -1,0 +1,18 @@
+1
+Pasa Nicolina
+Timisoara
+Director
+11/05/2025
+1200.00
+2
+Frunze Alexandra
+Chisinau
+Manager
+01/01/2025
+1300
+3
+Horia Andrei
+Chisinau
+Manager
+21/02/2025
+1000.00
